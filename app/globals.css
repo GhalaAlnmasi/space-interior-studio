@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ivory: #f5f1e9;
+  --sand: #d8ccba;
+  --sage: #777f67;
+  --charcoal: #242820;
+  --bronze: #a77c55;
+  --sage-deep: #4a5140;
+  --bronze-deep: #6e4e32;
+  --ivory-deep: #e7e0d4;
+  --ink-soft: #3a4036;
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+  color-scheme: light;
 }
 
 @theme inline {
+  --color-ivory: var(--ivory);
+  --color-sand: var(--sand);
+  --color-sage: var(--sage);
+  --color-charcoal: var(--charcoal);
+  --color-bronze: var(--bronze);
+  --color-sage-deep: var(--sage-deep);
+  --color-bronze-deep: var(--bronze-deep);
+  --color-ivory-deep: var(--ivory-deep);
+  --color-ink-soft: var(--ink-soft);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), "Iowan Old Style", Palatino, "Palatino Linotype", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--sand);
+  color: var(--charcoal);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bronze-deep);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.05rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-rise {
+  animation: hero-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.delay-1 {
+  animation-delay: 90ms;
+}
+
+.delay-2 {
+  animation-delay: 190ms;
+}
+
+.delay-3 {
+  animation-delay: 320ms;
+}
+
+.delay-4 {
+  animation-delay: 460ms;
+}
+
+.delay-5 {
+  animation-delay: 590ms;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.scroll-cue {
+  display: block;
+  width: 1px;
+  height: 3.25rem;
+  background: linear-gradient(to bottom, transparent, var(--bronze-deep));
+  transform-origin: top;
+  animation: scroll-cue 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-rise,
+  .page-enter {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
